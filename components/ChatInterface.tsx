@@ -400,20 +400,20 @@ export default function ChatInterface() {
         </div>
 
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4">
-          <div className="max-w-4xl mx-auto space-y-4">
+        <div className="flex-1 overflow-y-auto p-3 md:p-4">
+          <div className="max-w-4xl mx-auto space-y-3 md:space-y-4">
             {messages.map((msg, idx) => (
               <div
                 key={idx}
-                className={`flex gap-3 ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'} animate-in slide-in-from-bottom-4 duration-300`}
+                className={`flex gap-2 md:gap-3 ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'} animate-in slide-in-from-bottom-4 duration-300`}
               >
-                <div className={`flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center ${
+                <div className={`flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-xl flex items-center justify-center ${
                   msg.role === 'user' 
                     ? 'bg-gradient-to-br from-yellow-700 to-yellow-600 shadow-lg shadow-yellow-700/30' 
                     : 'bg-gradient-to-br from-yellow-500 to-yellow-400 shadow-lg shadow-yellow-500/30 overflow-hidden'
                 }`}>
                   {msg.role === 'user' ? (
-                    <span className="text-black text-xs font-bold">You</span>
+                    <span className="text-black text-[10px] md:text-xs font-bold">You</span>
                   ) : (
                     <img 
                       src="https://static.vecteezy.com/system/resources/previews/002/007/732/original/golden-lion-head-sign-free-vector.jpg" 
@@ -423,15 +423,15 @@ export default function ChatInterface() {
                   )}
                 </div>
 
-                <div className={`flex-1 max-w-[75%] ${msg.role === 'user' ? 'items-end' : 'items-start'} flex flex-col`}>
-                  <div className={`rounded-2xl px-5 py-3.5 ${
+                <div className={`flex-1 max-w-[85%] md:max-w-[75%] ${msg.role === 'user' ? 'items-end' : 'items-start'} flex flex-col`}>
+                  <div className={`rounded-2xl px-3 py-2.5 md:px-5 md:py-3.5 ${
                     msg.role === 'user'
                       ? 'bg-gradient-to-br from-yellow-700 to-yellow-600 text-white shadow-lg shadow-yellow-700/20'
                       : 'bg-neutral-900 text-yellow-50 border border-yellow-600/30 shadow-lg shadow-yellow-900/10'
                   }`}>
-                    <p className="text-sm leading-relaxed whitespace-pre-line">{msg.content}</p>
+                    <p className="text-xs md:text-sm leading-relaxed whitespace-pre-line">{msg.content}</p>
                   </div>
-                  <span className="text-xs text-neutral-600 mt-1.5 px-2">
+                  <span className="text-[10px] md:text-xs text-neutral-600 mt-1 md:mt-1.5 px-2">
                     {mounted ? new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '--:--'}
                   </span>
                 </div>
@@ -439,15 +439,15 @@ export default function ChatInterface() {
             ))}
 
             {isTyping && (
-              <div className="flex gap-3 animate-in slide-in-from-bottom-4">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-gradient-to-br from-yellow-500 to-yellow-400 shadow-lg shadow-yellow-500/30 overflow-hidden">
+              <div className="flex gap-2 md:gap-3 animate-in slide-in-from-bottom-4">
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl flex items-center justify-center bg-gradient-to-br from-yellow-500 to-yellow-400 shadow-lg shadow-yellow-500/30 overflow-hidden">
                   <img 
                     src="https://static.vecteezy.com/system/resources/previews/002/007/732/original/golden-lion-head-sign-free-vector.jpg" 
                     alt="Rex Security"
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="bg-neutral-900 rounded-2xl px-5 py-3.5 border border-yellow-600/30">
+                <div className="bg-neutral-900 rounded-2xl px-3 py-2.5 md:px-5 md:py-3.5 border border-yellow-600/30">
                   <div className="flex gap-1.5">
                     <div className="w-2 h-2 bg-yellow-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
                     <div className="w-2 h-2 bg-yellow-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
@@ -459,13 +459,13 @@ export default function ChatInterface() {
 
             {showSuggestions && messages.length === 1 && (
               <div className="space-y-3 animate-in fade-in-50 duration-500">
-                <p className="text-sm text-neutral-500 text-center">Quick questions you can ask:</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                <p className="text-xs md:text-sm text-neutral-500 text-center">Quick questions you can ask:</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {SUGGESTED_PROMPTS.map((prompt, idx) => (
                     <button
                       key={idx}
                       onClick={() => { setInput(prompt); setShowSuggestions(false); }}
-                      className="bg-neutral-900 hover:bg-neutral-800 border border-yellow-600/20 hover:border-yellow-600/40 text-yellow-100 text-sm px-4 py-2.5 rounded-xl transition-all hover:scale-[1.02] text-left"
+                      className="bg-neutral-900 hover:bg-neutral-800 border border-yellow-600/20 hover:border-yellow-600/40 text-yellow-100 text-xs md:text-sm px-3 py-2 md:px-4 md:py-2.5 rounded-xl transition-all hover:scale-[1.02] text-left"
                     >
                       {prompt}
                     </button>
@@ -481,9 +481,9 @@ export default function ChatInterface() {
         {/* Contact Form Modal */}
         {showContactForm && (
           <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-in fade-in duration-200">
-            <div className="bg-neutral-900 border border-yellow-500/30 rounded-2xl p-6 max-w-md w-full shadow-2xl shadow-yellow-900/20 animate-in slide-in-from-bottom-8 duration-300">
+            <div className="bg-neutral-900 border border-yellow-500/30 rounded-2xl p-4 md:p-6 max-w-md w-full shadow-2xl shadow-yellow-900/20 animate-in slide-in-from-bottom-8 duration-300">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-bold text-yellow-500">Contact HR</h3>
+                <h3 className="text-lg md:text-xl font-bold text-yellow-500">Contact HR</h3>
                 <button onClick={() => setShowContactForm(false)} className="text-neutral-400 hover:text-white">
                   <X className="w-5 h-5" />
                 </button>
@@ -492,7 +492,7 @@ export default function ChatInterface() {
               <div className="flex gap-2 mb-4">
                 <button
                   onClick={() => setContactType('email')}
-                  className={`flex-1 px-4 py-2 rounded-lg transition-all ${
+                  className={`flex-1 px-3 md:px-4 py-2 rounded-lg transition-all text-sm ${
                     contactType === 'email' 
                       ? 'bg-yellow-500 text-black font-semibold' 
                       : 'bg-neutral-800 text-neutral-400 hover:bg-neutral-700'
@@ -521,7 +521,7 @@ export default function ChatInterface() {
                   required
                   value={contactForm.name}
                   onChange={(e) => setContactForm({...contactForm, name: e.target.value})}
-                  className="w-full bg-neutral-800 border border-yellow-500/30 rounded-lg px-4 py-2.5 text-yellow-50 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  className="w-full bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-black font-bold py-2.5 md:py-3 rounded-lg transition-all transform hover:scale-[1.02] shadow-lg shadow-yellow-600/40 text-sm"
                 />
                 
                 {contactType === 'email' && (
@@ -557,7 +557,7 @@ export default function ChatInterface() {
 
                 {showCallConfirm && (
                   <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3">
-                    <p className="text-sm text-yellow-300">
+                    <p className="text-xs md:text-sm text-yellow-300">
                       ⚠️ We'll call you at <strong>{contactForm.phone}</strong> during business hours (Mon-Fri, 9 AM - 5 PM). Confirm?
                     </p>
                   </div>
@@ -576,30 +576,30 @@ export default function ChatInterface() {
 
         {/* Call Button (appears when high intent detected) */}
         {showCallButton && (
-          <div className="fixed bottom-24 right-8 z-50 animate-in slide-in-from-bottom-8 duration-500">
-            <div className="bg-gradient-to-r from-green-600 to-green-500 text-white p-4 rounded-2xl shadow-2xl shadow-green-600/50 max-w-sm">
-              <div className="flex items-start gap-3">
-                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0 animate-pulse">
-                  <Phone className="w-6 h-6" />
+          <div className="fixed bottom-20 md:bottom-24 left-4 right-4 md:left-auto md:right-8 z-50 animate-in slide-in-from-bottom-8 duration-500">
+            <div className="bg-gradient-to-r from-green-600 to-green-500 text-white p-3 md:p-4 rounded-2xl shadow-2xl shadow-green-600/50 max-w-sm md:ml-auto">
+              <div className="flex items-start gap-2 md:gap-3">
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0 animate-pulse">
+                  <Phone className="w-5 h-5 md:w-6 md:h-6" />
                 </div>
-                <div className="flex-1">
-                  <p className="font-bold text-sm mb-1">Ready to get started?</p>
-                  <p className="text-xs opacity-90 mb-3">Our team has been notified and will call you shortly!</p>
+                <div className="flex-1 min-w-0">
+                  <p className="font-bold text-xs md:text-sm mb-1">Ready to get started?</p>
+                  <p className="text-[10px] md:text-xs opacity-90 mb-2 md:mb-3">Our team has been notified and will call you shortly!</p>
                   <a
                     href="tel:832-690-5813"
-                    className="block w-full bg-white text-green-600 font-bold py-2 px-4 rounded-lg text-center hover:bg-green-50 transition-all text-sm"
+                    className="block w-full bg-white text-green-600 font-bold py-1.5 md:py-2 px-3 md:px-4 rounded-lg text-center hover:bg-green-50 transition-all text-xs md:text-sm"
                   >
                     Call Now: 832-690-5813
                   </a>
                   {!userProvidedPhone && (
-                    <p className="text-xs opacity-75 mt-2">Or provide your number and we will call you!</p>
+                    <p className="text-[10px] md:text-xs opacity-75 mt-2">Or provide your number and we will call you!</p>
                   )}
                 </div>
                 <button
                   onClick={() => setShowCallButton(false)}
-                  className="text-white/80 hover:text-white"
+                  className="text-white/80 hover:text-white flex-shrink-0"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-4 h-4 md:w-5 md:h-5" />
                 </button>
               </div>
             </div>
@@ -608,25 +608,25 @@ export default function ChatInterface() {
         
 
         {/* Quick Contact Bar */}
-        <div className="bg-neutral-900/80 backdrop-blur-sm border-t border-yellow-600/20 px-4 py-2">
-          <div className="max-w-4xl mx-auto flex flex-wrap items-center justify-center gap-4 text-xs text-neutral-500">
-            <div className="flex items-center gap-1.5">
-              <Phone className="w-3.5 h-3.5 text-yellow-600" />
-              <span>832-690-5813</span>
+        <div className="bg-neutral-900/80 backdrop-blur-sm border-t border-yellow-600/20 px-2 md:px-4 py-2 flex-shrink-0">
+          <div className="max-w-4xl mx-auto flex flex-wrap items-center justify-center gap-2 md:gap-4 text-[10px] md:text-xs text-neutral-500">
+            <div className="flex items-center gap-1 md:gap-1.5">
+              <Phone className="w-3 h-3 md:w-3.5 md:h-3.5 text-yellow-600" />
+              <span className="truncate">832-690-5813</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <Mail className="w-3.5 h-3.5 text-yellow-600" />
-              <span>rexllc24@gmail.com</span>
+              <Mail className="w-3 h-3 md:w-3.5 md:h-3.5 text-yellow-600" />
+              <span className="truncate">rexllc24@gmail.com</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-yellow-600" />
+              <MapPin className="w-3 h-3 md:w-3.5 md:h-3.5 text-yellow-600" />
               <span>Houston, TX</span>
             </div>
           </div>
         </div>
 
         {/* Input Area */}
-        <div className="bg-black/80 backdrop-blur-xl border-t border-yellow-600/20 p-4 shadow-lg shadow-yellow-900/10">
+        <div className="bg-black/80 backdrop-blur-xl border-t border-yellow-600/20 p-3 md:p-4 shadow-lg shadow-yellow-900/10 flex-shrink-0">
           <div className="max-w-4xl mx-auto">
             <div className="relative flex items-center gap-2">
               <div className="flex-1 relative">
@@ -636,19 +636,19 @@ export default function ChatInterface() {
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={handleKeyPress}
                   placeholder="Ask about our security services..."
-                  className="w-full bg-neutral-900 border border-yellow-600/30 rounded-2xl px-6 py-4 text-yellow-50 placeholder-neutral-600 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent transition-all"
+                  className="w-full bg-neutral-900 border border-yellow-600/30 rounded-2xl px-4 md:px-6 py-3 md:py-4 text-sm md:text-base text-yellow-50 placeholder-neutral-600 focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:border-transparent transition-all"
                   disabled={isTyping}
                 />
               </div>
               <button
                 onClick={handleSend}
                 disabled={!input.trim() || isTyping}
-                className="bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 disabled:from-neutral-800 disabled:to-neutral-700 disabled:cursor-not-allowed text-black font-bold p-4 rounded-2xl shadow-lg shadow-yellow-600/40 hover:shadow-yellow-500/60 transition-all transform hover:scale-105 disabled:scale-100"
+                className="bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 disabled:from-neutral-800 disabled:to-neutral-700 disabled:cursor-not-allowed text-black font-bold p-3 md:p-4 rounded-2xl shadow-lg shadow-yellow-600/40 hover:shadow-yellow-500/60 transition-all transform hover:scale-105 disabled:scale-100 flex-shrink-0"
               >
-                <Send className="w-5 h-5" />
+                <Send className="w-4 h-4 md:w-5 md:h-5" />
               </button>
             </div>
-            <p className="text-xs text-neutral-600 text-center mt-2">
+            <p className="text-[10px] md:text-xs text-neutral-600 text-center mt-2">
               Licensed • Reliable • Professional Security Services
             </p>
           </div>
