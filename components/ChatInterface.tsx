@@ -44,7 +44,7 @@ export default function ChatInterface() {
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showContactForm, setShowContactForm] = useState(false);
   const [contactType, setContactType] = useState<'email' | 'call'>('email');
   const [showCallButton, setShowCallButton] = useState(false);
@@ -657,3 +657,4 @@ export default function ChatInterface() {
     </div>
   );
 }
+
