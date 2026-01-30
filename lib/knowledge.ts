@@ -22,11 +22,10 @@ export const REX_KNOWLEDGE = {
     "Parking Lot & Perimeter Patrol"
   ],
   pricing: {
-    unarmedDay: "$20-$28/hour",
-    unarmedNight: "$24-$28/hour",
-    armed: "$22-$35/hour",
-    mobilePatrol: "$200 per visit",
-    event: "$350 / 5hr per guard"
+    unarmed: "starting at $20 per officer/hour",
+    armed: "starting at $20 per officer/hour",
+    mobilePatrol: "mobile patrol rental options; $600 monthly",
+    event: " $350 per officer up to 5hrs (overtimerate applies)"
   },
   coverage: [
     "Houston Metro Area",
@@ -48,7 +47,7 @@ export const SYSTEM_PROMPT = `You are the official virtual assistant for Rex Sec
 - Answer questions about security services, pricing, coverage areas, and company information
 - Maintain a professional, calm, and confident tone
 - Never make up information - only use the provided context
-- Detect when users show serious buying intent and offer direct communication
+- Detect when users show serious buying intent and offer to email the HR
 
 **Company Context:**
 ${JSON.stringify(REX_KNOWLEDGE, null, 2)}
@@ -78,6 +77,8 @@ When user wants to contact HR or apply for job, include:
 4. Be helpful but professional - no casual slang
 5. For employment/hiring questions, direct to HR contact
 6. For quotes, provide indicative rates and offer formal proposal via Operations
+7. Do not drop numbers or email of HR unless user specifically and directly asks for it
+8. Only offer to contact HR directly by yourself without dropping any contact
 
 **Response Style:**
 - Clear and direct
@@ -105,7 +106,7 @@ export const generateSimulatedResponse = (userMessage: string): string | null =>
   // Quote Request with high intent
   if (msg.includes('quote') || msg.includes('price') || msg.includes('cost') || msg.includes('rate')) {
     const intentMarker = hasHighIntent ? '\n\n[INTENT:HIGH_INTEREST]' : '';
-    return `**Security Service Rates (Indicative):**\n\n• Unarmed Guard (Day): ${REX_KNOWLEDGE.pricing.unarmedDay}\n• Unarmed Guard (Night): ${REX_KNOWLEDGE.pricing.unarmedNight}\n• Armed Guard: ${REX_KNOWLEDGE.pricing.armed}\n• Mobile Patrol: ${REX_KNOWLEDGE.pricing.mobilePatrol}\n• Event Security: ${REX_KNOWLEDGE.pricing.event}\n\n*Rates are negotiable for long-term contracts, multiple guards, or multiple locations.*\n\nWould you like me to connect you with our operations team for a formal proposal?${intentMarker}`;
+    return `**Security Service Rates (Indicative):**\n\n• Unarmed Guard: ${REX_KNOWLEDGE.pricing.unarmed}\n• Armed Guard: ${REX_KNOWLEDGE.pricing.armed}\n• Mobile Patrol: ${REX_KNOWLEDGE.pricing.mobilePatrol}\n• Event Security: ${REX_KNOWLEDGE.pricing.event}\n\nWould you like me to connect you with our operations team for a formal proposal?${intentMarker}`;
   }
   
   // Coverage Areas
